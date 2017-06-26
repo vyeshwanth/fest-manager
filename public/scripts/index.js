@@ -1,6 +1,6 @@
 var manager = function () {
 	let client;
-	client = Object.assign($('.window'), {
+	client = $.extend($('.window'), {
 		header: $('.window > .topbar'),
 		main: $('.window > .remnant > .main'),
 		navigation: $('.window > .remnant > .sidebar'),
@@ -13,7 +13,8 @@ var manager = function () {
 			user: {},
 		}
 	});
-	client.route = function (route, status = true) {
+	client.route = function (route, status) {
+		status = status == undefined ? status : true;
 		$('.window > .remnant').removeClass('shift_to_expose_menu');
 		if (route[0] != '/')
 			route = '/' + route;
@@ -59,9 +60,10 @@ var manager = function () {
 			$target = $("[_triggers*='" + trigger + "']");
 			$target.each(function () {
 				var arr = $(this).attr('_triggers').split(' ');
-				var triggerelem = arr.find(function (elem) {
+				var triggerelem = $.grep(arr, function (elem) {
 					return elem.split('=')[0] == trigger;
 				});
+				triggerelem = triggerelem[0]
 				if (triggerelem) {
 					if (change.lhs) {
 						$(this).addClass(triggerelem.split('=')[1]);
