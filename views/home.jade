@@ -1,7 +1,11 @@
+include mixins/logo
 link(href="/stylesheets/home.style.css" rel="stylesheet")
 div.immersive-wrapper
+	div#webGLwrapper(width="100%" height="100%")
 	div.center 
 		span.logo
-			object(data="/images/logo.svg" type="image/svg+xml" id="atmos_logo") 
-		span.title atmos
+			//- object#atmos_logo(data="/images/logo.svg" type="image/svg+xml")
+			+logoMixin
+		span.title#atmos_titling atmos
+img(src="/images/logo.png" onload="sassylogo();this.parentNode.removeChild(this)")
 script(src="/scripts/home.js" type="text/javascript")
